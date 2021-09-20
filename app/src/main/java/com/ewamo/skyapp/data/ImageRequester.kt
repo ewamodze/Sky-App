@@ -1,8 +1,8 @@
 package com.ewamo.skyapp.data
 
-import android.app.Activity
 import android.content.Context
 import android.net.Uri.Builder
+import androidx.fragment.app.Fragment
 import com.ewamo.skyapp.R
 import okhttp3.*
 import org.json.JSONException
@@ -11,7 +11,7 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ImageRequester(listeningActivity: Activity) {
+class ImageRequester(listeningActivity: Fragment) {
 
     interface ImageRequesterResponse {
         fun receivedNewPhoto(newPhoto: Photo)
@@ -21,7 +21,7 @@ class ImageRequester(listeningActivity: Activity) {
     private val dateFormat: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
     private val responseListener: ImageRequesterResponse =
         listeningActivity as ImageRequesterResponse
-    private val context: Context = listeningActivity.applicationContext
+    private val context: Fragment = listeningActivity
     private val client: OkHttpClient = OkHttpClient()
 
     var isLoadingData: Boolean = false
