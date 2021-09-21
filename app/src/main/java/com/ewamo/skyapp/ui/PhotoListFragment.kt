@@ -14,7 +14,7 @@ import com.ewamo.skyapp.databinding.FragmentPhotoListBinding
 import com.ewamo.skyapp.photos.PhotoAdapter
 import java.io.IOException
 
-class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
+class PhotoListFragment : Fragment(), ImageRequester.ImageRequesterResponse {
 
 //    private val viewModel: PhotoViewModel by viewModels()
 //    private var selectedPhoto: Photo? = null
@@ -152,7 +152,7 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
         }
     }
 
-    fun receivedNewPhoto(newPhoto: Photo) {
+    override fun receivedNewPhoto(newPhoto: Photo) {
         activity?.runOnUiThread {
             photosList.add(newPhoto)
             adapter.notifyItemInserted(photosList.size - 1)

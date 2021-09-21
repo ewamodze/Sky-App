@@ -1,6 +1,5 @@
 package com.ewamo.skyapp.data
 
-import android.content.Context
 import android.net.Uri.Builder
 import androidx.fragment.app.Fragment
 import com.ewamo.skyapp.R
