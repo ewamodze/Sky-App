@@ -26,8 +26,8 @@ class PhotoListFragment : Fragment(), ImageRequester.ImageRequesterResponse {
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var gridLayoutManager: GridLayoutManager
     private lateinit var imageRequester: ImageRequester
-    private var photosList: java.util.ArrayList<Photo> = java.util.ArrayList()
-    private lateinit var adapter: PhotoAdapter
+    private var photosList: ArrayList<Photo> = ArrayList()
+    private lateinit var photoAdapter: PhotoAdapter
 
     private val lastVisibleItemPosition: Int
         get() = if (binding.recyclerViewPhotos.layoutManager == linearLayoutManager) {
@@ -51,7 +51,7 @@ class PhotoListFragment : Fragment(), ImageRequester.ImageRequesterResponse {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        val photoAdapter = PhotoAdapter(this)
+        photoAdapter = PhotoAdapter(photosList, )
 
         binding.apply {
             linearLayoutManager =
@@ -59,26 +59,15 @@ class PhotoListFragment : Fragment(), ImageRequester.ImageRequesterResponse {
             gridLayoutManager = GridLayoutManager(requireContext(), 2)
 
             recyclerViewPhotos.apply {
-                adapter = adapter
+                adapter = photoAdapter
                 layoutManager = LinearLayoutManager(requireContext())
                 setHasFixedSize(true)
             }
         }
-//        initializeAdapter(photoData)
         setRecyclerViewItemTouchListener()
         setRecyclerViewScrollListener()
         imageRequester = ImageRequester(this)
     }
-
-//    private fun initializeAdapter(photoData: ArrayList<Photo>) {
-//
-//        val adapter = PhotoAdapter(photoData)
-//        adapter.onItemClick = { position ->
-//            selectedPhoto = position
-//
-//
-//        }
-//    }
 
     private fun changeLayoutManager() {
         if (binding.recyclerViewPhotos.layoutManager == linearLayoutManager) {
@@ -155,7 +144,7 @@ class PhotoListFragment : Fragment(), ImageRequester.ImageRequesterResponse {
     override fun receivedNewPhoto(newPhoto: Photo) {
         activity?.runOnUiThread {
             photosList.add(newPhoto)
-            adapter.notifyItemInserted(photosList.size - 1)
+            photoAdapter.notifyItemInserted(photosList.size - 1)
         }
     }
 

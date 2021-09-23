@@ -8,8 +8,7 @@ import com.ewamo.skyapp.data.Photo
 import com.ewamo.skyapp.databinding.ItemPhotoBinding
 
 class PhotoAdapter(
-    private val photos: ArrayList<Photo>,
-    private val listener: AdapterView.OnItemClickListener
+    private val photos: ArrayList<Photo>
 ) :
     RecyclerView.Adapter<PhotoAdapter.PhotoViewHolder>() {
 
