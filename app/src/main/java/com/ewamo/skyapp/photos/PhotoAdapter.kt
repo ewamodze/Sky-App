@@ -46,6 +46,8 @@ class PhotoAdapter(
             binding.apply {
 
                 Picasso.get().load(photo?.url).into(itemImage)
+                itemDate.text = photo.humanDate
+                itemDescription.text = photo.explanation
             }
         }
 
