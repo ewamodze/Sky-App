@@ -36,6 +36,11 @@ class PhotoListFragment : Fragment(), ImageRequester.ImageRequesterResponse {
             gridLayoutManager.findLastVisibleItemPosition()
         }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -116,6 +121,7 @@ class PhotoListFragment : Fragment(), ImageRequester.ImageRequesterResponse {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_main, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
