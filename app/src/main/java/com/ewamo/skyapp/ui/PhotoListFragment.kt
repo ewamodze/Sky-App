@@ -51,7 +51,7 @@ class PhotoListFragment : Fragment(), ImageRequester.ImageRequesterResponse {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        photoAdapter = PhotoAdapter(photosList, )
+        photoAdapter = PhotoAdapter(photosList)
 
         binding.apply {
             linearLayoutManager =
