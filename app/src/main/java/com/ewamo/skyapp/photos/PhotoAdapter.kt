@@ -9,7 +9,6 @@ import com.squareup.picasso.Picasso
 
 class PhotoAdapter : RecyclerView.Adapter<PhotoAdapter.PhotoViewHolder>() {
 
-    //    private lateinit var binding: ItemPhotoBinding
     var onItemClick: (Int) -> Unit = {}
 
     var photos: ArrayList<Photo> = arrayListOf()
@@ -41,9 +40,6 @@ class PhotoAdapter : RecyclerView.Adapter<PhotoAdapter.PhotoViewHolder>() {
 
     inner class PhotoViewHolder(private val binding: ItemPhotoBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
-
-
 
         fun bind(photo: Photo) {
             binding.apply {

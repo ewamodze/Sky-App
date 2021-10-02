@@ -16,9 +16,6 @@ import java.io.IOException
 
 class PhotoListFragment : Fragment(), ImageRequester.ImageRequesterResponse {
 
-//    private val viewModel: PhotoViewModel by viewModels()
-//    private var selectedPhoto: Photo? = null
-
     private var _binding: FragmentPhotoListBinding? = null
     private val binding
         get() = _binding!!
@@ -26,7 +23,6 @@ class PhotoListFragment : Fragment(), ImageRequester.ImageRequesterResponse {
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var gridLayoutManager: GridLayoutManager
     private lateinit var imageRequester: ImageRequester
-//    private var photosList: ArrayList<Photo> = ArrayList()
     private lateinit var photoAdapter: PhotoAdapter
 
     private val lastVisibleItemPosition: Int
@@ -48,9 +44,6 @@ class PhotoListFragment : Fragment(), ImageRequester.ImageRequesterResponse {
     ): View? {
         _binding = FragmentPhotoListBinding.inflate(inflater, container, false)
         return binding.root
-
-//        selectedPhoto = intent.getSerializableExtra(PHOTO_KEY) as Photo
-//        Picasso.with(this).load(selectedPhoto?.url).into(photoImageView)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
