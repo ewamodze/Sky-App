@@ -7,13 +7,16 @@ import com.ewamo.skyapp.data.Photo
 import com.ewamo.skyapp.databinding.ItemPhotoBinding
 import com.squareup.picasso.Picasso
 
-class PhotoAdapter(
-    private val photos: ArrayList<Photo>
-) :
-    RecyclerView.Adapter<PhotoAdapter.PhotoViewHolder>() {
+class PhotoAdapter : RecyclerView.Adapter<PhotoAdapter.PhotoViewHolder>() {
 
     //    private lateinit var binding: ItemPhotoBinding
     var onItemClick: (Int) -> Unit = {}
+
+    var photos: ArrayList<Photo> = arrayListOf()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoViewHolder {
         val binding = ItemPhotoBinding

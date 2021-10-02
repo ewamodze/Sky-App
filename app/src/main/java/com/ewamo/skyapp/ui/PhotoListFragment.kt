@@ -26,7 +26,7 @@ class PhotoListFragment : Fragment(), ImageRequester.ImageRequesterResponse {
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var gridLayoutManager: GridLayoutManager
     private lateinit var imageRequester: ImageRequester
-    private var photosList: ArrayList<Photo> = ArrayList()
+//    private var photosList: ArrayList<Photo> = ArrayList()
     private lateinit var photoAdapter: PhotoAdapter
 
     private val lastVisibleItemPosition: Int
@@ -56,7 +56,7 @@ class PhotoListFragment : Fragment(), ImageRequester.ImageRequesterResponse {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        photoAdapter = PhotoAdapter(photosList)
+        photoAdapter = PhotoAdapter()
 
         binding.apply {
             linearLayoutManager =
@@ -65,7 +65,7 @@ class PhotoListFragment : Fragment(), ImageRequester.ImageRequesterResponse {
 
             recyclerViewPhotos.apply {
                 adapter = photoAdapter
-                layoutManager = LinearLayoutManager(requireContext())
+                layoutManager = linearLayoutManager
                 setHasFixedSize(true)
             }
         }
@@ -77,7 +77,7 @@ class PhotoListFragment : Fragment(), ImageRequester.ImageRequesterResponse {
     private fun changeLayoutManager() {
         if (binding.recyclerViewPhotos.layoutManager == linearLayoutManager) {
             binding.recyclerViewPhotos.layoutManager = gridLayoutManager
-            if (photosList.size == 1) {
+            if (photoAdapter.photos.size == 1) {
                 requestPhoto()
             }
         } else {
@@ -99,7 +99,7 @@ class PhotoListFragment : Fragment(), ImageRequester.ImageRequesterResponse {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int) {
                 val position = viewHolder.adapterPosition
-                photosList.removeAt(position)
+                photoAdapter.photos.removeAt(position)
                 binding.recyclerViewPhotos.adapter!!.notifyItemRemoved(position)
             }
         }
@@ -134,7 +134,7 @@ class PhotoListFragment : Fragment(), ImageRequester.ImageRequesterResponse {
 
     override fun onStart() {
         super.onStart()
-        if (photosList.size == 0) {
+        if (photoAdapter.photos.size == 0) {
             requestPhoto()
         }
     }
@@ -149,8 +149,10 @@ class PhotoListFragment : Fragment(), ImageRequester.ImageRequesterResponse {
 
     override fun receivedNewPhoto(newPhoto: Photo) {
         activity?.runOnUiThread {
-            photosList.add(newPhoto)
-            photoAdapter.notifyItemInserted(photosList.size - 1)
+            var photos = photoAdapter.photos
+            photos.add(newPhoto)
+            photoAdapter.photos = photos
+            //photoAdapter.notifyItemInserted(photoAdapter.photos.size-1)
         }
     }
 
