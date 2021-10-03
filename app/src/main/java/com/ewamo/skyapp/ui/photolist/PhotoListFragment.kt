@@ -1,8 +1,9 @@
-package com.ewamo.skyapp.ui
+package com.ewamo.skyapp.ui.photolist
 
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +13,7 @@ import com.ewamo.skyapp.data.ImageRequester
 import com.ewamo.skyapp.data.Photo
 import com.ewamo.skyapp.databinding.FragmentPhotoListBinding
 import com.ewamo.skyapp.photos.PhotoAdapter
+import com.ewamo.skyapp.ui.photodetail.PhotoDetailFragment
 import java.io.IOException
 
 class PhotoListFragment : Fragment(), ImageRequester.ImageRequesterResponse {
@@ -65,6 +67,18 @@ class PhotoListFragment : Fragment(), ImageRequester.ImageRequesterResponse {
         setRecyclerViewItemTouchListener()
         setRecyclerViewScrollListener()
         imageRequester = ImageRequester(this)
+        initializeAdapter()
+    }
+
+    private fun initializeAdapter() {
+
+        photoAdapter = PhotoAdapter()
+        photoAdapter.onItemClick = { position ->
+            val action = PhotoListFragmentDirections.openPhoto(photoAdapter.photos[position])
+            findNavController().navigate(action)
+        }
+
+        binding.recyclerViewPhotos.adapter = photoAdapter
     }
 
     private fun changeLayoutManager() {

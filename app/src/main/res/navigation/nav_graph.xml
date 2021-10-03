@@ -6,20 +6,20 @@
     app:startDestination="@id/photoListFragment">
     <fragment
         android:id="@+id/photoListFragment"
-        android:name="com.ewamo.skyapp.ui.PhotoListFragment"
+        android:name="com.ewamo.skyapp.ui.photolist.PhotoListFragment"
         android:label="PhotoList"
         tools:layout="@layout/fragment_photo_list">
         <action
-            android:id="@+id/openPhoto"
+            android:id="@+id/open_photo"
             app:destination="@id/photoDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/photoDetailFragment"
-        android:name="com.ewamo.skyapp.ui.PhotoDetailFragment"
+        android:name="com.ewamo.skyapp.ui.photodetail.PhotoDetailFragment"
         android:label="fragment_detail_photo"
         tools:layout="@layout/fragment_detail_photo" >
         <argument
-            android:name="Photo"
+            android:name="photo"
             app:argType="com.ewamo.skyapp.data.Photo"
             app:nullable="true" />
     </fragment>
