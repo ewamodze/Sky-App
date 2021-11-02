@@ -1,11 +1,11 @@
 package com.ewamo.skyapp.photos
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ewamo.skyapp.data.Photo
 import com.ewamo.skyapp.databinding.ItemPhotoBinding
-import com.squareup.picasso.Picasso
 
 class PhotoAdapter : RecyclerView.Adapter<PhotoAdapter.PhotoViewHolder>() {
 
@@ -21,13 +21,6 @@ class PhotoAdapter : RecyclerView.Adapter<PhotoAdapter.PhotoViewHolder>() {
         val binding = ItemPhotoBinding
             .inflate(LayoutInflater.from(parent.context), parent, false)
 
-        val itemView = binding.root
-
-        val itemHolder = PhotoViewHolder(binding)
-        itemView.setOnClickListener {
-            onItemClick(itemHolder.adapterPosition)
-        }
-
         return PhotoViewHolder(binding)
     }
 
@@ -36,6 +29,10 @@ class PhotoAdapter : RecyclerView.Adapter<PhotoAdapter.PhotoViewHolder>() {
         photo?.let {
             holder.bind(it)
         }
+        holder.itemView.setOnClickListener {
+            Log.i("MyTag", "position = $position")
+            onItemClick(position)
+        }
     }
 
     inner class PhotoViewHolder(private val binding: ItemPhotoBinding) :
@@ -43,10 +40,7 @@ class PhotoAdapter : RecyclerView.Adapter<PhotoAdapter.PhotoViewHolder>() {
 
         fun bind(photo: Photo) {
             binding.apply {
-
-                Picasso.get().load(photo?.url).into(itemImage)
-                itemDate.text = photo.humanDate
-                itemDescription.text = photo.explanation
+                data = photo
             }
         }
 
